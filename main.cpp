@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include "Grass.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
     sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+
+    kf::Grass grass;
 
     while (window.isOpen())
     {
@@ -16,7 +18,8 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        grass.update(1.0f);
+        grass.render(window);
         window.display();
     }
 
