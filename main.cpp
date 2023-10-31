@@ -1,12 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "Grass.hpp"
+#include "MapFileLoader.hpp"
 
 int main()
 {
+    kf::MapFileLoader loader;
+    auto blocks = loader.load("map.txt");
+
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
     sf::CircleShape shape(100.f);
-
-    kf::Grass grass;
 
     while (window.isOpen())
     {
@@ -18,8 +20,10 @@ int main()
         }
 
         window.clear();
-        grass.update(1.0f);
-        grass.render(window);
+        for (auto& el : blocks) {
+            el->render(window);
+            el->update(1.0f);
+        }
         window.display();
     }
 
